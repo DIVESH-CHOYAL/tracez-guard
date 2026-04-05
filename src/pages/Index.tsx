@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LayerModal from "@/components/LayerModal";
 import { sampleVerdicts } from "@/data/mockData";
 
 const stagger = { animate: { transition: { staggerChildren: 0.08 } } };
@@ -35,11 +36,18 @@ const layerSteps = [
 const verdictColor = (v: string) => v === "DANGEROUS" ? "text-tz-danger" : v === "SAFE" ? "text-tz-safe" : "text-tz-warn";
 const verdictBorder = (v: string) => v === "DANGEROUS" ? "border-l-danger" : v === "SAFE" ? "border-l-safe" : "border-l-warn";
 
+const howItWorksSteps = [
+  { num: "1", title: "Upload or paste", desc: "Drop a file or paste a URL" },
+  { num: "2", title: "7 layers scan", desc: "All layers run in parallel" },
+  { num: "3", title: "Plain English verdict", desc: "Results in seconds" },
+];
+
 const Index = () => {
   const navigate = useNavigate();
   const [dragOver, setDragOver] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [url, setUrl] = useState("");
+  const [selectedLayer, setSelectedLayer] = useState<number | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const handleFile = (file: File) => {
@@ -52,7 +60,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-tz-bg dot-grid relative overflow-hidden">
-      {/* Glow orbs */}
       <div className="glow-cyan absolute w-[700px] h-[700px] top-[-150px] left-1/2 -translate-x-1/2 z-0" />
       <div className="glow-purple absolute w-[500px] h-[500px] top-[-100px] right-[-100px] z-0" />
 
@@ -165,7 +172,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* How it Works */}
+      {/* How it Works — 7 Layers */}
       <section id="how-it-works" className="relative z-10 px-6 py-20 max-w-5xl mx-auto">
         <div className="text-center mb-12">
           <span className="font-space text-[11px] text-tz-accent uppercase tracking-[0.12em]">How It Works</span>
@@ -174,8 +181,13 @@ const Index = () => {
         <div className="relative">
           <div className="hidden md:block absolute top-6 left-6 right-6 h-px border-t border-dashed border-tz-text-muted/30" />
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-6">
-            {layerSteps.map((step) => (
-              <motion.div key={step.id} whileHover={{ scale: 1.05 }} className="flex flex-col items-center text-center group">
+            {layerSteps.map((step, i) => (
+              <motion.div
+                key={step.id}
+                whileHover={{ scale: 1.05 }}
+                onClick={() => setSelectedLayer(i)}
+                className="flex flex-col items-center text-center group cursor-pointer"
+              >
                 <div className="w-12 h-12 rounded-full flex items-center justify-center font-space font-bold text-base text-tz-accent relative z-10 group-hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] transition-shadow" style={{ border: "1px solid rgba(0,229,255,0.3)", background: "hsl(var(--bg))" }}>
                   {step.id}
                 </div>
@@ -184,6 +196,34 @@ const Index = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Privacy Trust Strip */}
+      <section className="relative z-10 px-6 py-8 max-w-3xl mx-auto">
+        <div className="glass-card-static p-6 flex items-start gap-4">
+          <span className="text-2xl shrink-0">🔒</span>
+          <p className="font-inter text-sm text-tz-text-secondary leading-relaxed">
+            Your file bytes are never stored or transmitted. Only a 64-character hash fingerprint ever leaves your session.
+          </p>
+        </div>
+      </section>
+
+      {/* How it works 3-step */}
+      <section className="relative z-10 px-6 py-12 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6">
+          {howItWorksSteps.map((step, i) => (
+            <div key={step.num} className="glass-card-static p-6 text-center relative">
+              <div className="w-10 h-10 rounded-full mx-auto mb-4 flex items-center justify-center font-space font-bold text-lg text-tz-accent" style={{ border: "1px solid rgba(0,229,255,0.3)", background: "rgba(0,229,255,0.06)" }}>
+                {step.num}
+              </div>
+              <p className="font-inter font-semibold text-sm text-tz-text-primary">{step.title}</p>
+              <p className="font-inter text-xs text-tz-text-muted mt-2">{step.desc}</p>
+              {i < 2 && (
+                <span className="hidden md:block absolute top-1/2 -right-4 text-tz-text-muted text-lg">→</span>
+              )}
+            </div>
+          ))}
         </div>
       </section>
 
@@ -205,10 +245,10 @@ const Index = () => {
           <div className="glass-card-static p-8" style={{ borderColor: "rgba(0,229,255,0.2)" }}>
             <h3 className="font-inter font-semibold text-lg text-tz-text-primary mb-4 flex items-center gap-2">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-tz-accent"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              TraceZ
+              Scany
             </h3>
             <ul className="space-y-3">
-              {["File bytes never leave your machine — architectural guarantee", "Plain English: 'Do not install. This app steals SMS.'", "AI similarity catches 91% matches of renamed malware", "Full APK DEX bytecode analysis", "SDK fingerprinting + combo rules", "You can't test your malware against TraceZ"].map((t) => (
+              {["File bytes never leave your machine — architectural guarantee", "Plain English: 'Do not install. This app steals SMS.'", "AI similarity catches 91% matches of renamed malware", "Full APK DEX bytecode analysis", "SDK fingerprinting + combo rules", "You can't test your malware against Scany"].map((t) => (
                 <li key={t} className="flex items-start gap-2 font-inter text-sm text-tz-text-secondary"><span className="text-tz-safe mt-0.5">✓</span> {t}</li>
               ))}
             </ul>
@@ -218,7 +258,7 @@ const Index = () => {
 
       {/* Sample Verdicts */}
       <section className="relative z-10 px-6 py-20 max-w-5xl mx-auto">
-        <h2 className="font-syne font-bold text-3xl md:text-[40px] text-tz-text-primary text-center mb-12">What TraceZ tells you</h2>
+        <h2 className="font-syne font-bold text-3xl md:text-[40px] text-tz-text-primary text-center mb-12">What Scany tells you</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {sampleVerdicts.map((v) => (
             <div key={v.filename} className={`glass-card-static p-6 ${verdictBorder(v.verdict)}`}>
@@ -243,6 +283,9 @@ const Index = () => {
       </section>
 
       <Footer />
+
+      {/* Layer Modal */}
+      <LayerModal layerIndex={selectedLayer} onClose={() => setSelectedLayer(null)} />
     </div>
   );
 };
