@@ -64,7 +64,7 @@ const ScanResults = () => {
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           className="glass-card-static p-4 mb-6 flex items-center gap-3"
-          style={{ background: config.bannerBg, borderColor: mockResult.verdict === "SAFE" ? "rgba(0,230,118,0.3)" : "rgba(255,82,82,0.3)" }}
+          style={{ background: config.bannerBg, borderColor: (mockResult.verdict as string) === "SAFE" ? "rgba(0,230,118,0.3)" : "rgba(255,82,82,0.3)" }}
         >
           <span className={`text-lg ${config.color}`}>{config.icon}</span>
           <span className={`font-inter font-medium text-sm ${config.color}`}>{config.bannerText}</span>
