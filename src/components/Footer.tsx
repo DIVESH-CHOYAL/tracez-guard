@@ -4,8 +4,8 @@ const Footer = () => (
   <footer className="border-t border-border py-12 px-6 md:px-12" style={{ background: "rgba(8,9,13,0.95)" }}>
     <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
       <div>
-        <span className="font-syne font-bold text-lg text-tz-accent">TraceZ</span>
-        <p className="font-space text-[11px] text-tz-text-muted mt-2">© 2025 TraceZ Security Platform · Confidential</p>
+        <span className="font-syne font-bold text-lg text-tz-accent">Scany</span>
+        <p className="font-space text-[11px] text-tz-text-muted mt-2">© 2025 Scany Security Platform · Confidential</p>
       </div>
       <div className="flex flex-wrap gap-6 font-inter text-sm text-tz-text-muted">
         <Link to="#" className="hover:text-tz-text-secondary transition-colors">Privacy</Link>

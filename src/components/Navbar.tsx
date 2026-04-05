@@ -25,8 +25,11 @@ const Navbar = () => {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-[100] h-16 flex items-center px-6 md:px-12" style={{ background: "rgba(8,9,13,0.85)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-        <Link to="/" className="font-syne font-bold text-xl text-tz-accent shrink-0">
-          TraceZ<sup className="text-tz-text-muted text-[10px] ml-0.5">™</sup>
+        <Link to="/" className="flex items-center gap-2 shrink-0">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-tz-accent">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span className="font-syne font-bold text-xl text-tz-accent">Scany</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-6 mx-auto">
@@ -46,10 +49,10 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-3 ml-auto">
           <button onClick={() => { setAuthMode("login"); setAuthOpen(true); }} className="h-9 px-4 text-sm font-inter text-tz-text-secondary border border-border rounded-lg hover:border-tz-text-muted transition-colors">
-            Log In
+            Sign In
           </button>
           <button onClick={() => { setAuthMode("signup"); setAuthOpen(true); }} className="h-9 px-5 text-sm font-syne font-bold rounded-lg text-tz-bg" style={{ background: "linear-gradient(135deg, #00E5FF, #0098C7)" }}>
-            Get Started
+            Get Pro
           </button>
         </div>
 
@@ -68,8 +71,8 @@ const Navbar = () => {
                 {l.label}
               </Link>
             ))}
-            <button onClick={() => { setAuthMode("login"); setAuthOpen(true); setMobileOpen(false); }} className="mt-4 text-tz-text-secondary font-inter">Log In</button>
-            <button onClick={() => { setAuthMode("signup"); setAuthOpen(true); setMobileOpen(false); }} className="px-6 py-3 font-syne font-bold rounded-lg text-tz-bg" style={{ background: "linear-gradient(135deg, #00E5FF, #0098C7)" }}>Get Started</button>
+            <button onClick={() => { setAuthMode("login"); setAuthOpen(true); setMobileOpen(false); }} className="mt-4 text-tz-text-secondary font-inter">Sign In</button>
+            <button onClick={() => { setAuthMode("signup"); setAuthOpen(true); setMobileOpen(false); }} className="px-6 py-3 font-syne font-bold rounded-lg text-tz-bg" style={{ background: "linear-gradient(135deg, #00E5FF, #0098C7)" }}>Get Pro</button>
           </motion.div>
         )}
       </AnimatePresence>
