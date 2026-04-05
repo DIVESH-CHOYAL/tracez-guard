@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index";
 import ScanProgress from "./pages/ScanProgress";
-import ScanResult from "./pages/ScanResult";
+import ScanResults from "./pages/ScanResults";
 import TRZDatabase from "./pages/TRZDatabase";
 import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
@@ -21,7 +21,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/scan/:scanId" element={<ScanProgress />} />
-          <Route path="/result/:scanId" element={<ScanResult />} />
+          <Route path="/scan/:scanId/results" element={<ScanResults />} />
+          <Route path="/result/:scanId" element={<ScanResults />} />
           <Route path="/trz-database" element={<TRZDatabase />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="*" element={<NotFound />} />

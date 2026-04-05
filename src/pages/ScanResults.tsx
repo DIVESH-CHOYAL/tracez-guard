@@ -26,7 +26,7 @@ const mockResult = {
   ],
 };
 
-const verdictConfig = {
+const verdictConfig: Record<string, { color: string; bg: string; border: string; glow: string; icon: string; bannerBg: string; bannerBorder: string; bannerText: string }> = {
   DANGEROUS: { color: "text-tz-danger", bg: "rgba(255,82,82,0.08)", border: "border-tz-danger", glow: "rgba(255,82,82,0.12)", icon: "⚠", bannerBg: "rgba(255,82,82,0.1)", bannerBorder: "border-tz-danger", bannerText: "Do not install or open this file" },
   SUSPICIOUS: { color: "text-tz-warn", bg: "rgba(255,171,0,0.08)", border: "border-tz-warn", glow: "rgba(255,171,0,0.12)", icon: "⚠", bannerBg: "rgba(255,171,0,0.1)", bannerBorder: "border-tz-warn", bannerText: "Do not install or open this file" },
   SAFE: { color: "text-tz-safe", bg: "rgba(0,230,118,0.08)", border: "border-tz-safe", glow: "rgba(0,230,118,0.12)", icon: "✓", bannerBg: "rgba(0,230,118,0.1)", bannerBorder: "border-tz-safe", bannerText: "No threats detected" },
